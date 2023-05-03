@@ -1,0 +1,6 @@
+[book]
+authors = ["JohnsonLee"]
+language = "zh"
+multilingual = true
+src = "src"
+title = "数据库课程实验文档2023"
