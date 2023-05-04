@@ -3,7 +3,7 @@
 ## 实验前阅读
 
 - [学术诚信（什么事情能做，什么不能）](http://integrity.mit.edu/)
-- 如何正确向助教提问：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[别像弱智一样提问](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)
+- 如何正确向助教提问：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[Stop-Ask-Questions-The-Stupid-Ways](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)
 - 外部资源
     - [CMU 15445](https://15445.courses.cs.cmu.edu/spring2023/)
         - 卡耐基梅隆大学的数据库课程网站
@@ -22,7 +22,7 @@
 
 **如何求助**
 
-- 如果你在实验过程中遇到了困难，并打算向助教寻求帮助，请先阅读[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[别像弱智一样提问](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)这两篇文档。
+- 如果你在实验过程中遇到了困难，并打算向助教寻求帮助，请先阅读[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[Stop-Ask-Questions-The-Stupid-Ways](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)这两篇文档。
 - 如果你发现了实验文档的错误、不严谨或者对实验内容有疑问或建议，建议通过右上角Github Issue向我们提出建议。
 
 ## 实验方案
@@ -48,5 +48,10 @@
 |推荐使用| <https://google.com> | <https://en.wikipedia.org> | <https://stackoverflow.com>         |
 |不推荐使用| ~~<https://baidu.com>~~| ~~<https://baike.baidu.com>~~|~~<https://zhidao.baidu.com>~~</br>~~<https://bbs.csdb.net>~~|
 
+一些说明：
+- 一般来说，百度对英文关键词的处理能力比不上Google。
+- 通常来说，英文维基百科比中文维基百科和百度百科包含更丰富的内容。 为了说明为什么要使用英文维基百科, 请你对比词条`Boyce-Codd范式`分别在[百度百科](https://baike.baidu.com/item/bcnf?fromModule=lemma_search-box)，[中文维基百科](https://zh.wikipedia.org/wiki/BC%E6%AD%A3%E8%A6%8F%E5%BD%A2%E5%BC%8F)和[英文维基百科](https://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form)中的内容。
+- stackoverflow是一个程序设计领域的问答网站，里面除了技术性的问题([What is ":-!!" in C code?](https://stackoverflow.com/questions/9229601/what-is-in-c/9229793#9229793))之外, 也有一些学术性([Is there a regular expression to detect a valid regular expression?](https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression)) 和一些有趣的问题([What is the “-->” operator in C++?](https://stackoverflow.com/questions/1642028/what-is-the-operator-in-c-c))。
+- 自从ChatGPT诞生以后许多问题可以直接问GPT，或许能获得比搜索引擎更好的答案，同学们也不妨使用。
 
 [^nju-pa-intro]: 本章节选并改编自[南京大学计算机系统基础课程实验课程文档](https://nju-projectn.github.io/ics-pa-gitbook/ics2022/#%E5%AE%9E%E9%AA%8C%E5%89%8D%E9%98%85%E8%AF%BB)
