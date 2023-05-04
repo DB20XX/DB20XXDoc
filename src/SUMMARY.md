@@ -2,5 +2,7 @@
 
 [Introduction](README.md)
 
-- [开发环境配置](./dev-env.md)
+- [开发环境配置](dev-env/dev-env.md)
+    - [安装Ubuntu22.04](dev-env/install-ubuntu.md)
+    - [安装依赖](dev-env/install-dependency.md)
 - [B+Tree](b-plus-tree.md)
