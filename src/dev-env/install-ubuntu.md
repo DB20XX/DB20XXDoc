@@ -1,5 +1,5 @@
 
-# 安装Ubuntu22.04
+# 安装Ubuntu20.04
 
 > 什么年代了还在用传统虚拟机
 
@@ -7,7 +7,7 @@
 
 `Windows 10/11`可以使用[WSL(Windows Linux Subsystem)](https://learn.microsoft.com/zh-cn/windows/wsl/install)
 
-如果很不幸你是家庭版用户，那么请自行安装[VirtualBox](https://www.virtualbox.org/)，上网搜索`How to install Ubuntu 22.04 on Virtualbox`进行安装。
+如果很不幸你是家庭版用户，那么请自行安装[VirtualBox](https://www.virtualbox.org/)，上网搜索`How to install Ubuntu 20.04 on Virtualbox`进行安装。
 
 ## MacOS
 

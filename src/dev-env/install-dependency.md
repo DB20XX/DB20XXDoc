@@ -84,7 +84,7 @@ public https://github.com/FLAYhhh/DB20XX.git (push)
 然后，配置你的用户名和邮箱，这步请务必要做，验收时会查看git log是否符合要求。用户名设为"名字拼音 姓拼音"，例如：张三，用户名配置为"San Zhang"。邮箱则配置为你的学校公邮。
 ```bash
 git config --local user.name "San Zhang" # 用户名
-git config --local user.email git config --local user.email "xxxxxxx@stu.ecnu.edu.cn" #邮箱
+git config --local user.email "xxxxxxx@stu.ecnu.edu.cn" #邮箱
 ```
 
 6. 如果公共代码仓库更新了，你可以通过下面的指令获取更新
