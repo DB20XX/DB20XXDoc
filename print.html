@@ -85,7 +85,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="dev-env/dev-env.html"><strong aria-hidden="true">1.</strong> 开发环境配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev-env/install-ubuntu.html"><strong aria-hidden="true">1.1.</strong> 安装Ubuntu22.04</a></li><li class="chapter-item expanded "><a href="dev-env/install-dependency.html"><strong aria-hidden="true">1.2.</strong> 安装依赖</a></li></ol></li><li class="chapter-item expanded "><a href="b-plus-tree.html"><strong aria-hidden="true">2.</strong> B+Tree</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="dev-env/dev-env.html"><strong aria-hidden="true">1.</strong> 开发环境配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev-env/install-ubuntu.html"><strong aria-hidden="true">1.1.</strong> 安装Ubuntu22.04</a></li><li class="chapter-item expanded "><a href="dev-env/install-dependency.html"><strong aria-hidden="true">1.2.</strong> 安装依赖并获取源代码</a></li><li class="chapter-item expanded "><a href="dev-env/build.html"><strong aria-hidden="true">1.3.</strong> 编译</a></li></ol></li><li class="chapter-item expanded "><a href="b-plus-tree.html"><strong aria-hidden="true">2.</strong> B+Tree</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -184,7 +184,7 @@
 <h2 id="实验环境"><a class="header" href="#实验环境">实验环境</a></h2>
 <ul>
 <li>编程语言：C++17</li>
-<li>操作系统：Ubuntu 22.04(使用其他发行版或其他版本的Ubuntu不保证文档可用，需要你自行探索如何操作)</li>
+<li>操作系统：Ubuntu 20.04(使用其他发行版或其他版本的Ubuntu不保证文档可用，需要你自行探索如何操作)</li>
 <li>编译器：GCC</li>
 </ul>
 <h2 id="如何查阅资料"><a class="header" href="#如何查阅资料">如何查阅资料</a></h2>
@@ -208,13 +208,13 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="开发环境配置"><a class="header" href="#开发环境配置">开发环境配置</a></h1>
 <p>再次强调该文档适用于Ubuntu 22.04，其余操作系统可以以此文档为依据自行探索如何操作。
 本章将一步步带你配置出一个好用的开发环境。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="安装ubuntu2204"><a class="header" href="#安装ubuntu2204">安装Ubuntu22.04</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="安装ubuntu2004"><a class="header" href="#安装ubuntu2004">安装Ubuntu20.04</a></h1>
 <blockquote>
 <p>什么年代了还在用传统虚拟机</p>
 </blockquote>
 <h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
 <p><code>Windows 10/11</code>可以使用<a href="https://learn.microsoft.com/zh-cn/windows/wsl/install">WSL(Windows Linux Subsystem)</a></p>
-<p>如果很不幸你是家庭版用户，那么请自行安装<a href="https://www.virtualbox.org/">VirtualBox</a>，上网搜索<code>How to install Ubuntu 22.04 on Virtualbox</code>进行安装。</p>
+<p>如果很不幸你是家庭版用户，那么请自行安装<a href="https://www.virtualbox.org/">VirtualBox</a>，上网搜索<code>How to install Ubuntu 20.04 on Virtualbox</code>进行安装。</p>
 <h2 id="macos"><a class="header" href="#macos">MacOS</a></h2>
 <p><code>MacOS</code>可以使用<a href="https://docs.orbstack.dev/"><strong>OrbStack</strong></a>、<a href="https://mac.getutm.app/">UTM</a>、<a href="https://apps.apple.com/us/app/parallels-desktop/id1085114709?mt=12">Parallels</a>或者<a href="https://www.virtualbox.org/">VirtualBox</a></p>
 <h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
@@ -222,7 +222,7 @@
 <blockquote>
 <p>虽然学习计算机专业不是为了修电脑装系统，但如果你连系统都没装过，也确实不太好意思跟亲戚说你是学计算机的。现在机会来了，如果你以前真的从来没有安装过操作系统，我们强烈建议你装一下真机，来了解一下安装操作系统都需要经历些什么。</p>
 </blockquote>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="安装依赖"><a class="header" href="#安装依赖">安装依赖</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="安装依赖并获取源代码"><a class="header" href="#安装依赖并获取源代码">安装依赖并获取源代码</a></h1>
 <h2 id="检查网络是否可用"><a class="header" href="#检查网络是否可用">检查网络是否可用</a></h2>
 <p>打开一个终端，输入以下指令：</p>
 <pre><code class="language-bash">ping -c 4 mirror.sjtu.edu.cn
@@ -294,12 +294,18 @@ public https://github.com/FLAYhhh/DB20XX.git (push)
 </code></pre>
 <p>然后，配置你的用户名和邮箱，这步请务必要做，验收时会查看git log是否符合要求。用户名设为&quot;名字拼音 姓拼音&quot;，例如：张三，用户名配置为&quot;San Zhang&quot;。邮箱则配置为你的学校公邮。</p>
 <pre><code class="language-bash">git config --local user.name &quot;San Zhang&quot; # 用户名
-git config --local user.email git config --local user.email &quot;xxxxxxx@stu.ecnu.edu.cn&quot; #邮箱
+git config --local user.email &quot;xxxxxxx@stu.ecnu.edu.cn&quot; #邮箱
 </code></pre>
 <ol start="6">
 <li>如果公共代码仓库更新了，你可以通过下面的指令获取更新</li>
 </ol>
 <pre><code class="language-bash">git pull public main
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="编译"><a class="header" href="#编译">编译</a></h1>
+<p>进入项目根目录</p>
+<pre><code class="language-bash">mkdir build &amp;&amp; cd build
+cmake .. -DWITH_BOOST=../boost -DWITH_DEBUG=ON
+make -j`nproc`
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="btree"><a class="header" href="#btree">B+Tree</a></h1>
 
