@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">Introduction</a></li><li class="chapter-item expanded "><a href="dev-env.html"><strong aria-hidden="true">1.</strong> 开发环境配置</a></li><li class="chapter-item expanded "><a href="b-plus-tree.html"><strong aria-hidden="true">2.</strong> B+Tree</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">Introduction</a></li><li class="chapter-item expanded "><a href="dev-env/dev-env.html"><strong aria-hidden="true">1.</strong> 开发环境配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev-env/install-ubuntu.html"><strong aria-hidden="true">1.1.</strong> 安装Ubuntu22.04</a></li><li class="chapter-item expanded "><a href="dev-env/install-dependency.html"><strong aria-hidden="true">1.2.</strong> 安装依赖</a></li></ol></li><li class="chapter-item expanded "><a href="b-plus-tree.html"><strong aria-hidden="true">2.</strong> B+Tree</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -152,6 +152,7 @@
 <h2 id="实验前阅读"><a class="header" href="#实验前阅读">实验前阅读</a></h2>
 <ul>
 <li><a href="http://integrity.mit.edu/">学术诚信（什么事情能做，什么不能）</a></li>
+<li>请务必仔细阅读<a href="dev-env/install-dependency.html#%E9%85%8D%E7%BD%AEgit">配置git</a>一节，这关乎你最终项目能否验收通过</li>
 <li>如何正确向助教提问：<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md">提问的智慧</a>和<a href="https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md">Stop-Ask-Questions-The-Stupid-Ways</a></li>
 <li>外部资源
 <ul>
@@ -178,11 +179,11 @@
 <li>如果你发现了实验文档的错误、不严谨或者对实验内容有疑问或建议，建议通过右上角Github Issue向我们提出建议。</li>
 </ul>
 <h2 id="实验方案"><a class="header" href="#实验方案">实验方案</a></h2>
-<p>理解数据库系统的根本途径是从零开始实现一个完整的数据库系统。但对于我们的课程项目来说从零做一个完整系统的工作量是&quot;超模&quot;的，于是我们基于MySQL8.0设计了DB20XX教学系统。本学期，同学们需要在该系统中完成一个B+树索引。</p>
+<p>理解数据库系统的根本途径是从零开始实现一个完整的数据库系统。但对于我们的课程项目来说从零做一个完整系统的工作量是&quot;超模&quot;的，于是我们基于MySQL8.0设计了<a href="https://github.com/FLAYhhh/DB20XX">DB20XX</a>教学系统。本学期，同学们需要在该系统中完成一个B+树索引。</p>
 <h2 id="实验环境"><a class="header" href="#实验环境">实验环境</a></h2>
 <ul>
 <li>编程语言：C++17</li>
-<li>操作系统：Ubuntu 20.04(使用其他发行版或其他版本的Ubuntu不保证文档可用，需要你自行探索如何操作)</li>
+<li>操作系统：Ubuntu 22.04(使用其他发行版或其他版本的Ubuntu不保证文档可用，需要你自行探索如何操作)</li>
 <li>编译器：GCC</li>
 </ul>
 <h2 id="如何查阅资料"><a class="header" href="#如何查阅资料">如何查阅资料</a></h2>
@@ -209,7 +210,7 @@
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                                                    <a rel="next" href="dev-env.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                                    <a rel="next" href="dev-env/dev-env.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -220,7 +221,7 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                                    <a rel="next" href="dev-env.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                    <a rel="next" href="dev-env/dev-env.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                             </nav>
