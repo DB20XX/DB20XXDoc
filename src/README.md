@@ -1,6 +1,6 @@
 # 介绍
 
-## 实验前阅读[^nju-pa-intro]
+## 实验前阅读
 
 - [学术诚信（什么事情能做，什么不能）](http://integrity.mit.edu/)
 - 如何正确向助教提问：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[别像弱智一样提问](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)
@@ -20,18 +20,33 @@
 
 --- 
 
-**如何获取帮助**
+**如何求助**
 
 - 如果你在实验过程中遇到了困难，并打算向助教寻求帮助，请先阅读[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[别像弱智一样提问](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)这两篇文档。
 - 如果你发现了实验文档的错误、不严谨或者对实验内容有疑问或建议，建议通过右上角Github Issue向我们提出建议。
 
-
 ## 实验方案
 
-
+理解数据库系统的根本途径是从零开始实现一个完整的数据库系统。但对于我们的课程项目来说从零做一个完整系统的工作量是"超模"的，于是我们基于MySQL8.0设计了DB20XX教学系统。本学期，同学们需要在该系统中完成一个B+树索引。
 
 ## 实验环境
 
-- 编程语言: C++17
+- 编程语言：C++17
+- 操作系统：Ubuntu 20.04(使用其他发行版或其他版本的Ubuntu不保证文档可用，需要你自行探索如何操作)
+- 编译器：GCC
 
-[^nju-pa-intro]: 节选并改编自[南京大学计算机系统基础课程实验课程文档](https://nju-projectn.github.io/ics-pa-gitbook/ics2022/#%E5%AE%9E%E9%AA%8C%E5%89%8D%E9%98%85%E8%AF%BB)
+## 如何查阅资料
+
+在学习和实验的过程中, 你会遇到大量的问题. 除了参考课本内容之外, 你需要掌握如何获取其它参考资料.
+
+但在此之前, 你需要适应查阅英文资料。
+
+如何适应查阅英文资料? 方法是尝试并坚持查阅英文资料.
+
+|   | 搜索引擎 | 百科 | 问答网站 |
+|:--|:---------|:-----|:---------|
+|推荐使用| <https://google.com> | <https://en.wikipedia.org> | <https://stackoverflow.com>         |
+|不推荐使用| ~~<https://baidu.com>~~| ~~<https://baike.baidu.com>~~|~~<https://zhidao.baidu.com>~~</br>~~<https://bbs.csdb.net>~~|
+
+
+[^nju-pa-intro]: 本章节选并改编自[南京大学计算机系统基础课程实验课程文档](https://nju-projectn.github.io/ics-pa-gitbook/ics2022/#%E5%AE%9E%E9%AA%8C%E5%89%8D%E9%98%85%E8%AF%BB)
