@@ -150,7 +150,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="介绍"><a class="header" href="#介绍">介绍</a></h1>
-<h2 id="实验前阅读sup-classfootnote-referencea-hrefnju-pa-intro1asup"><a class="header" href="#实验前阅读sup-classfootnote-referencea-hrefnju-pa-intro1asup">实验前阅读<sup class="footnote-reference"><a href="#nju-pa-intro">1</a></sup></a></h2>
+<h2 id="实验前阅读"><a class="header" href="#实验前阅读">实验前阅读</a></h2>
 <ul>
 <li><a href="http://integrity.mit.edu/">学术诚信（什么事情能做，什么不能）</a></li>
 <li>如何正确向助教提问：<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md">提问的智慧</a>和<a href="https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md">别像弱智一样提问</a></li>
@@ -173,18 +173,29 @@
 <p><strong>关于网络</strong></p>
 <p>实验文档托管在github page上，无法稳定魔法上网的同学可以点击右上角下载pdf版本。但由于该文档还处于实验阶段，随时可能进行更新，阅读pdf版本可能无法及时获取最新版的实验文档，所以还是推荐同学们设法稳定魔法上网。</p>
 <hr />
-<p><strong>如何获取帮助</strong></p>
+<p><strong>如何求助</strong></p>
 <ul>
 <li>如果你在实验过程中遇到了困难，并打算向助教寻求帮助，请先阅读<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md">提问的智慧</a>和<a href="https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md">别像弱智一样提问</a>这两篇文档。</li>
 <li>如果你发现了实验文档的错误、不严谨或者对实验内容有疑问或建议，建议通过右上角Github Issue向我们提出建议。</li>
 </ul>
 <h2 id="实验方案"><a class="header" href="#实验方案">实验方案</a></h2>
+<p>理解数据库系统的根本途径是从零开始实现一个完整的数据库系统。但对于我们的课程项目来说从零做一个完整系统的工作量是&quot;超模&quot;的，于是我们基于MySQL8.0设计了DB20XX教学系统。本学期，同学们需要在该系统中完成一个B+树索引。</p>
 <h2 id="实验环境"><a class="header" href="#实验环境">实验环境</a></h2>
 <ul>
-<li>编程语言: C++17</li>
+<li>编程语言：C++17</li>
+<li>操作系统：Ubuntu 20.04(使用其他发行版或其他版本的Ubuntu不保证文档可用，需要你自行探索如何操作)</li>
+<li>编译器：GCC</li>
 </ul>
+<h2 id="如何查阅资料"><a class="header" href="#如何查阅资料">如何查阅资料</a></h2>
+<p>在学习和实验的过程中, 你会遇到大量的问题. 除了参考课本内容之外, 你需要掌握如何获取其它参考资料.</p>
+<p>但在此之前, 你需要适应查阅英文资料。</p>
+<p>如何适应查阅英文资料? 方法是尝试并坚持查阅英文资料.</p>
+<table><thead><tr><th align="left"></th><th align="left">搜索引擎</th><th align="left">百科</th><th align="left">问答网站</th></tr></thead><tbody>
+<tr><td align="left">推荐使用</td><td align="left"><a href="https://google.com">https://google.com</a></td><td align="left"><a href="https://en.wikipedia.org">https://en.wikipedia.org</a></td><td align="left"><a href="https://stackoverflow.com">https://stackoverflow.com</a></td></tr>
+<tr><td align="left">不推荐使用</td><td align="left"><del><a href="https://baidu.com">https://baidu.com</a></del></td><td align="left"><del><a href="https://baike.baidu.com">https://baike.baidu.com</a></del></td><td align="left"><del><a href="https://zhidao.baidu.com">https://zhidao.baidu.com</a></del></br><del><a href="https://bbs.csdb.net">https://bbs.csdb.net</a></del></td></tr>
+</tbody></table>
 <div class="footnote-definition" id="nju-pa-intro"><sup class="footnote-definition-label">1</sup>
-<p>节选并改编自<a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2022/#%E5%AE%9E%E9%AA%8C%E5%89%8D%E9%98%85%E8%AF%BB">南京大学计算机系统基础课程实验课程文档</a></p>
+<p>本章节选并改编自<a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2022/#%E5%AE%9E%E9%AA%8C%E5%89%8D%E9%98%85%E8%AF%BB">南京大学计算机系统基础课程实验课程文档</a></p>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="环境搭建"><a class="header" href="#环境搭建">环境搭建</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="btree"><a class="header" href="#btree">B+Tree</a></h1>
