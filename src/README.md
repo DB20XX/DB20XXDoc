@@ -3,6 +3,7 @@
 ## 实验前阅读
 
 - [学术诚信（什么事情能做，什么不能）](http://integrity.mit.edu/)
+- 请务必仔细阅读[配置git](dev-env/install-dependency.md#配置git)一节，这关乎你最终项目能否验收通过
 - 如何正确向助教提问：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)和[Stop-Ask-Questions-The-Stupid-Ways](https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md)
 - 外部资源
     - [CMU 15445](https://15445.courses.cs.cmu.edu/spring2023/)
@@ -27,7 +28,7 @@
 
 ## 实验方案
 
-理解数据库系统的根本途径是从零开始实现一个完整的数据库系统。但对于我们的课程项目来说从零做一个完整系统的工作量是"超模"的，于是我们基于MySQL8.0设计了DB20XX教学系统。本学期，同学们需要在该系统中完成一个B+树索引。
+理解数据库系统的根本途径是从零开始实现一个完整的数据库系统。但对于我们的课程项目来说从零做一个完整系统的工作量是"超模"的，于是我们基于MySQL8.0设计了[DB20XX](https://github.com/FLAYhhh/DB20XX)教学系统。本学期，同学们需要在该系统中完成一个B+树索引。
 
 ## 实验环境
 
