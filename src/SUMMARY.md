@@ -2,5 +2,5 @@
 
 [Introduction](README.md)
 
-- [环境搭建](./dev-env.md)
+- [开发环境配置](./dev-env.md)
 - [B+Tree](b-plus-tree.md)
