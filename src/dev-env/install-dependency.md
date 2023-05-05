@@ -44,6 +44,7 @@ sudo apt install -y git
 2. 打开终端，输入以下指令。
 ```bash
 git clone --bare https://github.com/FLAYhhh/DB20XX.git db20xx-public
+git checkout bplustree_index
 ```
 3. 然后将公共的DB20XX代码仓库[mirror](https://git-scm.com/docs/git-push#Documentation/git-push.txt---mirror)到你的私有仓库。假设你的Github用户名是`student`，私有仓库名是`DB20XX-private`。在刚刚的终端里继续输入以下指令：
 ```bash
@@ -61,9 +62,9 @@ rm -rf db20xx-public
 4. 将你的私有仓库克隆下来
 ```bash
 # 如果你使用https进行push / pull
-git clone https://github.com/student/DB20XX-private.git main
+git clone https://github.com/student/DB20XX-private.git
 # 如果你使用ssh进行push / pull
-git clone git@github.com:student/DB20XX-private.git main
+git clone git@github.com:student/DB20XX-private.git
 ```
 
 5. 将公共的DB20XX代码仓库设为私有仓库的上游，以便跟随公共仓库的更新。
