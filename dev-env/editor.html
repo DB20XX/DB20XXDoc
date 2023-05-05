@@ -149,7 +149,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="ideeditor的配置"><a class="header" href="#ideeditor的配置">IDE/Editor的配置</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="ideeditor的配置"><a class="header" href="#ideeditor的配置">IDE/Editor的配置</a></h1>
 <h2 id="clion"><a class="header" href="#clion">CLion</a></h2>
 <p>如果你选择使用CLion进行开发，那么无需做任何配置，使用CLion打开源代码所在文件夹即可。</p>
 <h2 id="vscode"><a class="header" href="#vscode">VSCode</a></h2>
@@ -175,17 +176,10 @@
 </ul>
 </li>
 <li>
-<p>安装插件: <code>C/C++</code>、<code>CMake</code>、<code>CMake Tools</code>，如果你使用WSL开发，千万注意插件不是装在LOCAL里，一定要在WSL里</p>
-<pre><code>  ![VSCode Extension](images/vscode-extensions.png)
-</code></pre>
-</li>
-<li>
-<p>安装完成以后右下角会弹出提示框(如果没有弹出尝试重新打开文件夹)</p>
-<pre><code>  ![VSCode Alert](images/vscode-alert.png)
-</code></pre>
-<ul>
-<li>选择Yes，然后弹出选项框选Unspecified</li>
-</ul>
+<p>打开以后右下角会弹出提示框，点击Yes
+<img src="images/recommended_ext.png" alt="Install Recommended Extensions" />
+等待插件安装完成后，按<code>F1</code>输入<code>CMake: Configure</code>进行CMake自动配置，配置完成会后自动进行代码索引。
+等待索引完成后进入<code>storage/db20xx</code>文件夹，任意打开一个文件测试跳转等功能是否正常。</p>
 </li>
 </ul>
 

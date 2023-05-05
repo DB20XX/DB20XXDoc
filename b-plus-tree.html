@@ -149,17 +149,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="btree"><a class="header" href="#btree">B+Tree</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="btree"><a class="header" href="#btree">B+Tree</a></h1>
 <blockquote>
-<p>现在正式进入B+树实验的部分</p>
+<p>现在正式进入B+树实验的部分, 相关代码都在</p>
 </blockquote>
 <h2 id="概览"><a class="header" href="#概览">概览</a></h2>
-<p>本次课程实验实现一个B+树索引。B+树是一种自平衡的多路搜索树，广泛应用于数据库和文件系统的索引结构。与其他树结构（如二叉树、前缀树等）相比，B+树具有更低的树高和更好的磁盘I/O性能，特别适用于大量数据的存储和检索。一棵B+树由内部节点和叶子节点组成，内部节点负责进行索引，叶子节点存储真实数据。你的实现需要支持线程安全的搜索、插入、删除以及一个用于遍历叶子节点的迭代器。</p>
+<p>本次课程实验实现一个B+树索引。B+树是一种自平衡的多路搜索树，广泛应用于数据库和文件系统的索引结构。与其他树结构（如二叉树、前缀树等）相比，B+树具有更低的树高和更好的磁盘I/O性能，特别适用于大量数据的存储和检索。一棵B+树由内部节点和叶子节点组成，内部节点负责进行索引，叶子节点存储真实数据。你的实现需要支持线程安全的搜索、插入、删除以及一个用于有序遍历叶子节点的迭代器。</p>
 <p>实验分为两个阶段：</p>
 <p><strong>阶段#1(30分) - 截止日期：</strong></p>
 <ul>
 <li><a href="#%E4%BB%BB%E5%8A%A11---b%E6%A0%91%E7%BB%93%E7%82%B9">B+树节点</a></li>
-<li><a href="#%E4%BB%BB%E5%8A%A12a---b%E6%A0%91%E6%8F%92%E5%85%A5">B+树插入</a></li>
+<li><a href="#%E4%BB%BB%E5%8A%A12a---b%E6%A0%91%E6%8F%92%E5%85%A5%E4%B8%8E%E5%8D%95%E7%82%B9%E6%9F%A5%E8%AF%A2">B+树插入</a></li>
 </ul>
 <p><strong>阶段#2(70分) - 截止日期：</strong></p>
 <ul>
@@ -184,36 +185,116 @@
 <li>内部节点</li>
 <li>叶子节点</li>
 </ul>
-<div id="admonition-note" class="admonition note">
+<div id="admonition-节点" class="admonition note">
 <div class="admonition-title">
-<p>Note</p>
-<p><a class="admonition-anchor-link" href="#admonition-note"></a></p>
+<p>节点</p>
+<p><a class="admonition-anchor-link" href="#admonition-节点"></a></p>
 </div>
 <div>
-<p>节点(Node)</p>
+<p><code>BPlusTreeNode</code>是内部节点与叶子节点的基类，只包含两个子类所公有的信息。<code>BPlusTreeNode</code>应该包含以下字段：</p>
+<table><thead><tr><th align="left">变量名</th><th align="left">描述</th></tr></thead><tbody>
+<tr><td align="left">node_type_</td><td align="left">节点的类型(internal or leaf)</td></tr>
+<tr><td align="left">size_</td><td align="left">该节点当前内部键值对的数量</td></tr>
+<tr><td align="left">max_size_</td><td align="left">该节点最大能容纳的键值对数量</td></tr>
+</tbody></table>
+<p>你需要在<code>storage/db20xx/src/b_plus_tree_node.cc</code>和<code>storage/db20xx/include/b_plus_tree_node.h</code>两个文件中实现这个类。</p>
 </div>
 </div>
-<div id="admonition-note-1" class="admonition note">
+<div id="admonition-内部节点" class="admonition note">
 <div class="admonition-title">
-<p>Note</p>
-<p><a class="admonition-anchor-link" href="#admonition-note-1"></a></p>
+<p>内部节点</p>
+<p><a class="admonition-anchor-link" href="#admonition-内部节点"></a></p>
 </div>
 <div>
-<p>内部节点(InternalNode)</p>
+<p>一个<code>InternalNode</code>最多能存储<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>个键和<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span></span></span></span>个孩子指针。这些键和指针用一个长度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span></span></span></span>的数组进行存储即可。由于键和指针的数量不同，数组的第一个元素的键应该被忽略，在查找的时候总是从第二个元素开始。</p>
+<p><code>InternalNode</code>始终要保持以下性质：</p>
+<ul>
+<li>size_ = number of children</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.345em;"></span><span class="mopen">⌈</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">⌉</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9396em;vertical-align:-0.2452em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2952em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mrel mtight">≤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2452em;"><span></span></span></span></span></span></span><span class="mord mathnormal">d</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">∀</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∀</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">ey</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9028em;vertical-align:-0.2083em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">hi</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<p>你需要在<code>storage/db20xx/src/b_plus_tree_internal_node.cc</code>和<code>storage/db20xx/include/b_plus_tree_internal_node.h</code>两个文件中实现这个类。</p>
 </div>
 </div>
-<div id="admonition-note-2" class="admonition note">
+<div id="admonition-叶子节点" class="admonition note">
 <div class="admonition-title">
-<p>Note</p>
-<p><a class="admonition-anchor-link" href="#admonition-note-2"></a></p>
+<p>叶子节点</p>
+<p><a class="admonition-anchor-link" href="#admonition-叶子节点"></a></p>
 </div>
 <div>
-<p>叶子节点(LeafNode)</p>
+<p><code>LeafNode</code></p>
+<p><code>LeafNode</code>始终要保持以下性质：</p>
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.345em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">⌋</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9396em;vertical-align:-0.2452em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2952em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mrel mtight">≤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2452em;"><span></span></span></span></span></span></span><span class="mord mathnormal">d</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">∀</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<p>值得注意的是<code>InternalNode</code>和<code>LeafNode</code>的<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span></span></span></span>可以不同。</p>
+<p>你需要在<code>storage/db20xx/src/b_plus_tree_leaf_node.cc</code>和<code>storage/db20xx/include/b_plus_tree_leaf_node.h</code>两个文件中实现这个类。</p>
 </div>
 </div>
-<h3 id="任务2a---b树插入"><a class="header" href="#任务2a---b树插入">任务#2a - B+树插入</a></h3>
+<h3 id="任务2a---b树插入与单点查询"><a class="header" href="#任务2a---b树插入与单点查询">任务#2a - B+树插入与单点查询</a></h3>
+<p>在阶段#1，你的B+属索引必须支持插入(<a href="https://github.com/FLAYhhh/DB20XX/blob/9aa193c306bf97aa3897ea4086a7a065f81f6566/storage/db20xx/include/bplustree_index.h#L16"><code>put(key, value)</code></a>)以及单点查询(<a href="https://github.com/FLAYhhh/DB20XX/blob/9aa193c306bf97aa3897ea4086a7a065f81f6566/storage/db20xx/include/bplustree_index.h#LL28C3-L28C3"><code>get(key)</code></a>)。这个索引不支持重复键；如果试图向树中插入一个已经存在的键，就不进行插入，并且返回插入失败。</p>
+<p>如果插入操作会破坏B+树的性质，B+树节点应该分裂或进行键的重新分配。如果插入操作会更改根节点，则必须更新B+树索引中的<code>header_node_</code>。</p>
+<p>插入的流程如下：</p>
+<div id="admonition-info" class="admonition info">
+<div class="admonition-title">
+<p>Info</p>
+<p><a class="admonition-anchor-link" href="#admonition-info"></a></p>
+</div>
+<div>
+<ol start="0">
+<li>如果树为空，创建一个新的根节点</li>
+<li>找到插入位置所在的叶子节点<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></li>
+<li>向<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>中插入键值对
+<ul>
+<li>如果<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>还有足够的空间，操作完成</li>
+<li>否则，将<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>分裂为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>和<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>。将键值对在这两个节点之间平均分配，并且将中间的键复制后插入父亲节点<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>，使得<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>中有指向<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>的指针。</li>
+</ul>
+</li>
+<li>如果，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>有充足空间，则操作完成，否则将<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>分裂为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>和<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>，键值对平均分配。值得注意的是，与<code>LeafNode</code>的分裂不同，<code>InternalNode</code>分裂的时候，只需将中间的键插入爷爷节点，无需在<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>或<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>中保留这个中间键。</li>
+</ol>
+</div>
+</div>
+<p>单点查询的流程则与二叉树的搜索类似，在每次访问<code>InternalNode</code>的时候定位到下一层要去哪个孩子节点查询，访问<code>LeafNode</code>的时候再去查找<code>key</code>对应的<code>value</code>即可。</p>
 <h2 id="阶段2"><a class="header" href="#阶段2">阶段#2</a></h2>
 <h3 id="任务2b---b树删除"><a class="header" href="#任务2b---b树删除">任务#2b - B+树删除</a></h3>
+<p>本任务你需要实现键的删除(<a href="https://github.com/FLAYhhh/DB20XX/blob/9aa193c306bf97aa3897ea4086a7a065f81f6566/storage/db20xx/include/bplustree_index.h#L34"><code>remove(key)</code></a>)。</p>
+<p>如果在删除过程中破坏了B+树的性质，B+树节点应该进行合并或进行键的重新分配。与插入类似，如果根节点被删除了，你需要更新B+树的根节点。</p>
+<p>删除的流程如下：</p>
+<div id="admonition-info-1" class="admonition info">
+<div class="admonition-title">
+<p>Info</p>
+<p><a class="admonition-anchor-link" href="#admonition-info-1"></a></p>
+</div>
+<div>
+<ol start="0">
+<li>如果树是空的，直接返回</li>
+<li>找到删除位置所在叶子节点<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></li>
+<li>删除键值对
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>的size_仍在合法范围内，返回</li>
+<li>size_小于允许的最小值，进行合并或键的重新分配
+<ul>
+<li>如果<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>是其父节点<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>最右边的孩子，则与左孩子进行合并</li>
+<li>如果<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>最左边的孩子，则与右孩子进行合并</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>既不是最左也不是最右孩子，随意</li>
+<li>你需要自己思考何时进行合并，何时进行键的重新分配</li>
+<li>重新分配后需要对<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>做什么操作来保证有序性规定？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果上一步中发生了合并，在<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>中删除对应的键和指针</li>
+<li>如果删除一直传递到了根节点
+<ul>
+<li>如果根节点是叶子节点(即树只有根节点一个节点)，该做什么？</li>
+<li>如果根节点是内部节点，并且只剩一个唯一的孩子，该做什么？</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
 <h3 id="任务3---b树迭代器"><a class="header" href="#任务3---b树迭代器">任务#3 - B+树迭代器</a></h3>
 <h3 id="任务4---并发索引"><a class="header" href="#任务4---并发索引">任务#4 - 并发索引</a></h3>
 <h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>

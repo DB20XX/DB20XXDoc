@@ -149,7 +149,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="安装依赖并获取源代码"><a class="header" href="#安装依赖并获取源代码">安装依赖并获取源代码</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="安装依赖并获取源代码"><a class="header" href="#安装依赖并获取源代码">安装依赖并获取源代码</a></h1>
 <h2 id="检查网络是否可用"><a class="header" href="#检查网络是否可用">检查网络是否可用</a></h2>
 <p>打开一个终端，输入以下指令：</p>
 <pre><code class="language-bash">ping -c 4 mirror.sjtu.edu.cn
@@ -188,9 +189,9 @@ sudo apt install -y git
 </ol>
 <pre><code class="language-bash">cd db20xx-public
 # 如果你使用https进行push / pull
-git push https://github.com/student/DB20XX-private.git main
+git push https://github.com/student/DB20XX-private.git bplustree_index
 # 如果你使用ssh进行push / pull
-git push git@github.com:student/DB20XX-private.git main
+git push git@github.com:student/DB20XX-private.git bplustree_index
 </code></pre>
 <p>现在公共代码已经被复制到你的私有仓库里了，可以删掉公共代码了。</p>
 <pre><code class="language-bash">cd ..
@@ -200,9 +201,12 @@ rm -rf db20xx-public
 <li>将你的私有仓库克隆下来</li>
 </ol>
 <pre><code class="language-bash"># 如果你使用https进行push / pull
-git clone https://github.com/student/DB20XX-private.git main
+git clone https://github.com/student/DB20XX-private.git
 # 如果你使用ssh进行push / pull
-git clone git@github.com:student/DB20XX-private.git main
+git clone git@github.com:student/DB20XX-private.git
+
+#然后切换到bplustree_index这个分支上
+git checkout bplustree_index
 </code></pre>
 <ol start="5">
 <li>将公共的DB20XX代码仓库设为私有仓库的上游，以便跟随公共仓库的更新。
@@ -219,14 +223,14 @@ origin https://github.com/student/DB20XX-private.git (push)
 public https://github.com/FLAYhhh/DB20XX.git (fetch)
 public https://github.com/FLAYhhh/DB20XX.git (push)
 </code></pre>
-<p>然后，配置你的用户名和邮箱，这步请务必要做，验收时会查看git log是否符合要求。用户名设为&quot;名字拼音 姓拼音&quot;，例如：张三，用户名配置为&quot;San Zhang&quot;。邮箱则配置为你的学校公邮。</p>
+<p>然后，配置你的用户名和邮箱，这步请务必要做，验收时会查看git log是否符合要求。用户名设为“名字拼音 姓拼音“，例如：张三，用户名配置为“San Zhang“。邮箱则配置为你的学校公邮。</p>
 <pre><code class="language-bash">git config --local user.name &quot;San Zhang&quot; # 用户名
 git config --local user.email &quot;xxxxxxx@stu.ecnu.edu.cn&quot; #邮箱
 </code></pre>
 <ol start="6">
 <li>如果公共代码仓库更新了，你可以通过下面的指令获取更新</li>
 </ol>
-<pre><code class="language-bash">git pull public main
+<pre><code class="language-bash">git pull public bplustree_index
 </code></pre>
 
                     </main>
