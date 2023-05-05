@@ -8,7 +8,7 @@
 - 外部资源
     - [CMU 15445](https://15445.courses.cs.cmu.edu/spring2023/)
         - 卡耐基梅隆大学的数据库课程网站
-        - 如果你对数据库系统感兴趣，那么强烈推荐自学这门课（然后就可以联系[宫学庆老师](mailto:xqgong@sei.ecnu)来实验室做超酷的项目啦🤩）
+        - 如果你对数据库系统感兴趣，那么强烈推荐自学这门课（然后就可以联系[老师](mailto:xqgong@sei.ecnu)来实验室做超酷的项目啦🤩）
     - [一个简短的C++教程](https://www.thegeekstuff.com/2016/02/c-plus-plus-11/)
     - [cpp reference](https://en.cppreference.com/w/)提供了非常详细的C++标准文档
     - [GDB调试入门指南](https://zhuanlan.zhihu.com/p/74897601)
@@ -47,7 +47,7 @@
 |   | 搜索引擎 | 百科 | 问答网站 |
 |:--|:---------|:-----|:---------|
 |推荐使用| <https://google.com> | <https://en.wikipedia.org> | <https://stackoverflow.com>         |
-|不推荐使用| ~~<https://baidu.com>~~| ~~<https://baike.baidu.com>~~|~~<https://zhidao.baidu.com>~~</br>~~<https://bbs.csdb.net>~~|
+<!--|不推荐使用| ~~<https://baidu.com>~~| ~~<https://baike.baidu.com>~~|~~<https://zhidao.baidu.com>~~</br>~~<https://bbs.csdb.net>~~|-->
 
 一些说明：
 - 一般来说，百度对英文关键词的处理能力比不上Google。
