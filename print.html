@@ -466,7 +466,16 @@ make -j`nproc`
 </div>
 </div>
 <p>单点查询的流程则与二叉树的搜索类似，在每次访问<code>InternalNode</code>的时候定位到下一层要去哪个孩子节点查询，访问<code>LeafNode</code>的时候再去查找<code>key</code>对应的<code>value</code>即可。</p>
-<h2 id="阶段2"><a class="header" href="#阶段2">阶段#2</a></h2>
+<div id="admonition-tip" class="admonition tip">
+<div class="admonition-title">
+<p>Tip</p>
+<p><a class="admonition-anchor-link" href="b-plus-tree.html#admonition-tip"></a></p>
+</div>
+<div>
+<p>在进行实现的时候，你会看到一个很奇怪的参数叫<code>VersionChainHead*</code>，这是为了让树支持多个版本的值(与MVCC相关)。你可以认为值的版本构成了一个链表，插入操作可以不覆盖旧的值，而是在版本链的头部插入一个新版本的值。当然你也可以不做多版本的实现，直接将VersionChainHead当作值，插入的时候覆盖旧值即可。</p>
+</div>
+</div>
+## 阶段#2
 <h3 id="任务2b---b树删除"><a class="header" href="#任务2b---b树删除">任务#2b - B+树删除</a></h3>
 <p>本任务你需要实现键的删除(<a href="https://github.com/FLAYhhh/DB20XX/blob/9aa193c306bf97aa3897ea4086a7a065f81f6566/storage/db20xx/include/bplustree_index.h#L34"><code>remove(key)</code></a>)。</p>
 <p>如果在删除过程中破坏了B+树的性质，B+树节点应该进行合并或进行键的重新分配。与插入类似，如果根节点被删除了，你需要更新B+树的根节点。</p>
@@ -505,8 +514,20 @@ make -j`nproc`
 </div>
 </div>
 <h3 id="任务3---b树迭代器"><a class="header" href="#任务3---b树迭代器">任务#3 - B+树迭代器</a></h3>
+<p>本任务中，你需要实现一个C++迭代器用于有序便利所有叶子节点的键值对。由于叶子节点存储了它的兄弟节点的指针，迭代器的实现会非常简单。相关的代码在<code>storage/db20xx/include/index.h</code>中，你需要关注<a href="https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#LL34C1-L34C1"><code>ScanIterator</code></a>这个类。</p>
+<p>你的迭代器至少要能支持这四个函数：</p>
+<ul>
+<li><a href="https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#LL55C16-L55C16"><code>scan_range_first</code></a></li>
+<li><a href="https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#LL58C14-L58C15"><code>scan_range_next</code></a></li>
+<li><a href="https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#L60"><code>rscan_range_first</code></a></li>
+<li><a href="https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#L63"><code>rscan_range_next</code></a></li>
+</ul>
 <h3 id="任务4---并发索引"><a class="header" href="#任务4---并发索引">任务#4 - 并发索引</a></h3>
+<p>最后，修改你的B+树实现，让他支持安全的并发操作。最简单的思路是用一个互斥锁将整棵B+树锁住，在读/写操作的过程中上锁。但本次实验要求细化锁的粒度，每个节点拥有一个互斥锁，在读写的过程中去决定该锁住哪些节点。同时你可以使用<a href="https://15445.courses.cs.cmu.edu/fall2017/notes/18-notes-indexconcurrency.pdf">Lock Crabbing</a>技术来释放读写过程中不必要持有的父节点的锁来提升你的实现的并发性能。</p>
 <h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
+<div class="footnote-definition" id="Tree Indexes Lecture Note"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://15445.courses.cs.cmu.edu/spring2023/notes/08-trees.pdf">Tree Indexes Lecture Note from CMU 15445</a></p>
+</div>
 
                     </main>
 
