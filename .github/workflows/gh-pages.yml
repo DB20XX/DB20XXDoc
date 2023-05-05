@@ -25,6 +25,7 @@ jobs:
       - name: Setup mdbook-admonish
         run: |
           wget https://github.com/tommilligan/mdbook-admonish/releases/download/v1.9.0/mdbook-admonish-v1.9.0-x86_64-unknown-linux-musl.tar.gz -O - | tar -xzv
+          wget https://github.com/lzanini/mdbook-katex/releases/download/v0.4.1/mdbook-katex-v0.4.1-x86_64-unknown-linux-musl.tar.gz -O - | tar -xzv
 
       - run: mdbook build
 

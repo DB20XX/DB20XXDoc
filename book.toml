@@ -17,3 +17,7 @@ additional-css = ["./assets/css/mdbook-admonish.css"]
 command = "./mdbook-admonish"
 on_failure = "bail"
 assets_version = "2.0.1" # do not edit: managed by `mdbook-admonish install`
+
+[preprocessor.katex]
+command = "./mdbook-katex"
+after = ["links"]
