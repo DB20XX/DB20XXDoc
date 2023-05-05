@@ -15,11 +15,7 @@
     - WSL：按右下角的Open A Remote Window，选择New WSL Window，然后打开源代码所在文件夹
 
         ![Open A Remote Window](images/remote-btn.jpeg)
-- 安装插件: `C/C++`、`CMake`、`CMake Tools`，如果你使用WSL开发，千万注意插件不是装在LOCAL里，一定要在WSL里
-
-        ![VSCode Extension](images/vscode-extensions.png)
-
-- 安装完成以后右下角会弹出提示框(如果没有弹出尝试重新打开文件夹)
-        
-        ![VSCode Alert](images/vscode-alert.png)
-    - 选择Yes，然后弹出选项框选Unspecified
+- 打开以后右下角会弹出提示框，点击Yes
+        ![Install Recommended Extensions](images/recommended_ext.png)
+  等待插件安装完成后，按`F1`输入`CMake: Configure`进行CMake自动配置，配置完成会后自动进行代码索引。
+  等待索引完成后进入`storage/db20xx`文件夹，任意打开一个文件测试跳转等功能是否正常。
