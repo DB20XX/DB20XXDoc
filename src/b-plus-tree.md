@@ -86,6 +86,9 @@
 
 单点查询的流程则与二叉树的搜索类似，在每次访问`InternalNode`的时候定位到下一层要去哪个孩子节点查询，访问`LeafNode`的时候再去查找`key`对应的`value`即可。
 
+```admonish tip
+在进行实现的时候，你会看到一个很奇怪的参数叫`VersionChainHead*`，这是为了让树支持多个版本的值(与MVCC相关)。你可以认为值的版本构成了一个链表，插入操作可以不覆盖旧的值，而是在版本链的头部插入一个新版本的值。当然你也可以不做多版本的实现，直接将VersionChainHead当作值，插入的时候覆盖旧值即可。
+```
 ## 阶段#2
 
 ### 任务#2b - B+树删除
@@ -115,11 +118,20 @@
 
 ### 任务#3 - B+树迭代器
 
+本任务中，你需要实现一个C++迭代器用于有序便利所有叶子节点的键值对。由于叶子节点存储了它的兄弟节点的指针，迭代器的实现会非常简单。相关的代码在`storage/db20xx/include/index.h`中，你需要关注[`ScanIterator`](https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#LL34C1-L34C1)这个类。
+
+你的迭代器至少要能支持这四个函数：
+- [`scan_range_first`](https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#LL55C16-L55C16)
+- [`scan_range_next`](https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#LL58C14-L58C15)
+- [`rscan_range_first`](https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#L60)
+- [`rscan_range_next`](https://github.com/FLAYhhh/DB20XX/blob/1048ad20e318e653ee6579c058b77cea85dc81cc/storage/db20xx/include/index.h#L63)
+
 
 ### 任务#4 - 并发索引
 
+最后，修改你的B+树实现，让他支持安全的并发操作。最简单的思路是用一个互斥锁将整棵B+树锁住，在读/写操作的过程中上锁。但本次实验要求细化锁的粒度，每个节点拥有一个互斥锁，在读写的过程中去决定该锁住哪些节点。同时你可以使用[Lock Crabbing](https://15445.courses.cs.cmu.edu/fall2017/notes/18-notes-indexconcurrency.pdf)技术来释放读写过程中不必要持有的父节点的锁来提升你的实现的并发性能。
 
 
 ## 参考资料
 
-
+[^Tree Indexes Lecture Note]: [Tree Indexes Lecture Note from CMU 15445](https://15445.courses.cs.cmu.edu/spring2023/notes/08-trees.pdf)
