@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>安装依赖并获取源代码 - 华东师范大学 软件工程学院 数据库实践 课程实验 2023</title>
+        <title>IDE/Editor的配置 - 华东师范大学 软件工程学院 数据库实践 课程实验 2023</title>
                 
 
         <!-- Custom HTML head -->
@@ -85,7 +85,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../dev-env/dev-env.html"><strong aria-hidden="true">1.</strong> 开发环境配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dev-env/install-ubuntu.html"><strong aria-hidden="true">1.1.</strong> 安装Ubuntu20.04</a></li><li class="chapter-item expanded "><a href="../dev-env/install-dependency.html" class="active"><strong aria-hidden="true">1.2.</strong> 安装依赖并获取源代码</a></li><li class="chapter-item expanded "><a href="../dev-env/build.html"><strong aria-hidden="true">1.3.</strong> 编译</a></li><li class="chapter-item expanded "><a href="../dev-env/editor.html"><strong aria-hidden="true">1.4.</strong> IDE/Editor的配置</a></li></ol></li><li class="chapter-item expanded "><a href="../b-plus-tree.html"><strong aria-hidden="true">2.</strong> B+Tree</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../dev-env/dev-env.html"><strong aria-hidden="true">1.</strong> 开发环境配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dev-env/install-ubuntu.html"><strong aria-hidden="true">1.1.</strong> 安装Ubuntu20.04</a></li><li class="chapter-item expanded "><a href="../dev-env/install-dependency.html"><strong aria-hidden="true">1.2.</strong> 安装依赖并获取源代码</a></li><li class="chapter-item expanded "><a href="../dev-env/build.html"><strong aria-hidden="true">1.3.</strong> 编译</a></li><li class="chapter-item expanded "><a href="../dev-env/editor.html" class="active"><strong aria-hidden="true">1.4.</strong> IDE/Editor的配置</a></li></ol></li><li class="chapter-item expanded "><a href="../b-plus-tree.html"><strong aria-hidden="true">2.</strong> B+Tree</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -149,95 +149,55 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="安装依赖并获取源代码"><a class="header" href="#安装依赖并获取源代码">安装依赖并获取源代码</a></h1>
-<h2 id="检查网络是否可用"><a class="header" href="#检查网络是否可用">检查网络是否可用</a></h2>
-<p>打开一个终端，输入以下指令：</p>
-<pre><code class="language-bash">ping -c 4 mirror.sjtu.edu.cn
+                        <h1 id="ideeditor的配置"><a class="header" href="#ideeditor的配置">IDE/Editor的配置</a></h1>
+<h2 id="clion"><a class="header" href="#clion">CLion</a></h2>
+<p>如果你选择使用CLion进行开发，那么无需做任何配置，使用CLion打开源代码所在文件夹即可。</p>
+<h2 id="vscode"><a class="header" href="#vscode">VSCode</a></h2>
+<ul>
+<li>
+<p>查看VSCode文档，自行安装</p>
+<ul>
+<li>如果你使用VirtualBox一类的虚拟机，安装了带图形界面的Ubuntu，建议将VSCode安装在Ubuntu中</li>
+<li>如果你使用WSL，在Windows里安装VSCode然后在VSCode中安装WSL插件</li>
+<li>以下默认你是按照上面的方法安装的VSCode</li>
+</ul>
+</li>
+<li>
+<p>打开你的源代码所在的文件夹</p>
+<ul>
+<li>
+<p>虚拟机：直接按<code>Ctrl+O</code>打开文件夹</p>
+</li>
+<li>
+<p>WSL：按右下角的Open A Remote Window，选择New WSL Window，然后打开源代码所在文件夹</p>
+<p><img src="images/remote-btn.jpeg" alt="Open A Remote Window" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>安装插件: <code>C/C++</code>、<code>CMake</code>、<code>CMake Tools</code>，如果你使用WSL开发，千万注意插件不是装在LOCAL里，一定要在WSL里</p>
+<pre><code>  ![VSCode Extension](images/vscode-extensions.png)
 </code></pre>
-<p>如果网络通畅，你应该看到如下的输出：</p>
-<pre><code>PING mirror.sjtu.edu.cn (111.186.58.212) 56(84) bytes of data.
-64 bytes from 111.186.58.212 (111.186.58.212): icmp_seq=1 ttl=50 time=3.31 ms
-64 bytes from 111.186.58.212 (111.186.58.212): icmp_seq=2 ttl=50 time=2.42 ms
-64 bytes from 111.186.58.212 (111.186.58.212): icmp_seq=3 ttl=50 time=2.36 ms
-64 bytes from 111.186.58.212 (111.186.58.212): icmp_seq=4 ttl=50 time=1.78 ms
-
---- mirror.sjtu.edu.cn ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3004ms
-rtt min/avg/max/mdev = 1.781/2.468/3.306/0.544 ms
+</li>
+<li>
+<p>安装完成以后右下角会弹出提示框(如果没有弹出尝试重新打开文件夹)</p>
+<pre><code>  ![VSCode Alert](images/vscode-alert.png)
 </code></pre>
-<h2 id="apt换源"><a class="header" href="#apt换源">APT换源</a></h2>
-<p>apt是Debian系Linux中的一个命令行工具，用于管理软件包。它可以自动从互联网上下载并安装软件包，解决软件包之间的依赖关系，并升级已安装软件包。使用apt可以避免手动下载和安装软件包的繁琐过程，使软件包的管理更加简单、快捷和高效。apt的优点是操作简单、功能强大、自动依赖解决，是Linux系统中不可或缺的软件包管理工具之一。apt默认去海外的软件源下载软件包，由于GFW的存在，这个下载速度慢得令人发指，所以需要更换apt的软件源。
-请自行依照<a href="https://mirror.sjtu.edu.cn/docs/ubuntu">SJTU的指引</a>完成换源。</p>
-<p>为了方便后续操作，请<strong>务必</strong>将所有的<code>deb-src</code>镜像取消注释。</p>
-<h2 id="安装实验所需的工具和依赖"><a class="header" href="#安装实验所需的工具和依赖">安装实验所需的工具和依赖</a></h2>
-<p>如果上一步操作你没有将所有<code>deb-src</code>镜像取消注释，再次强调，请务必取消。
-打开终端，输入以下指令。</p>
-<pre><code class="language-bash">sudo apt build-dep -y mysql-server-8.0
-sudo apt install -y git
-</code></pre>
-<h2 id="配置git"><a class="header" href="#配置git">配置git</a></h2>
-<p>以下内容节选并改编自Github官方文档<a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository">Duplicating a repository</a>。</p>
-<ol>
-<li>打开<a href="https://github.com/new">这个页面</a>，在你自己的Github账户下创建一个新仓库。并且务必将可见性设为<strong>Private</strong>，确保你的代码只有你自己能看到。</li>
-<li>打开终端，输入以下指令。</li>
-</ol>
-<pre><code class="language-bash">git clone --bare https://github.com/FLAYhhh/DB20XX.git db20xx-public
-</code></pre>
-<ol start="3">
-<li>然后将公共的DB20XX代码仓库<a href="https://git-scm.com/docs/git-push#Documentation/git-push.txt---mirror">mirror</a>到你的私有仓库。假设你的Github用户名是<code>student</code>，私有仓库名是<code>DB20XX-private</code>。在刚刚的终端里继续输入以下指令：</li>
-</ol>
-<pre><code class="language-bash">cd db20xx-public
-# 如果你使用https进行push / pull
-git push https://github.com/student/DB20XX-private.git main
-# 如果你使用ssh进行push / pull
-git push git@github.com:student/DB20XX-private.git main
-</code></pre>
-<p>现在公共代码已经被复制到你的私有仓库里了，可以删掉公共代码了。</p>
-<pre><code class="language-bash">cd ..
-rm -rf db20xx-public
-</code></pre>
-<ol start="4">
-<li>将你的私有仓库克隆下来</li>
-</ol>
-<pre><code class="language-bash"># 如果你使用https进行push / pull
-git clone https://github.com/student/DB20XX-private.git main
-# 如果你使用ssh进行push / pull
-git clone git@github.com:student/DB20XX-private.git main
-</code></pre>
-<ol start="5">
-<li>将公共的DB20XX代码仓库设为私有仓库的上游，以便跟随公共仓库的更新。
-在终端中进入你的代码仓库。
-输入以下的指令</li>
-</ol>
-<pre><code class="language-bash">git remote add public https://github.com/FLAYhhh/DB20XX.git
-</code></pre>
-<p>你可以通过下面的指令查看当前仓库有几个远程源</p>
-<pre><code class="language-bash">git remote -v
-# 以下是输出
-origin https://github.com/student/DB20XX-private.git (fetch)
-origin https://github.com/student/DB20XX-private.git (push)
-public https://github.com/FLAYhhh/DB20XX.git (fetch)
-public https://github.com/FLAYhhh/DB20XX.git (push)
-</code></pre>
-<p>然后，配置你的用户名和邮箱，这步请务必要做，验收时会查看git log是否符合要求。用户名设为&quot;名字拼音 姓拼音&quot;，例如：张三，用户名配置为&quot;San Zhang&quot;。邮箱则配置为你的学校公邮。</p>
-<pre><code class="language-bash">git config --local user.name &quot;San Zhang&quot; # 用户名
-git config --local user.email &quot;xxxxxxx@stu.ecnu.edu.cn&quot; #邮箱
-</code></pre>
-<ol start="6">
-<li>如果公共代码仓库更新了，你可以通过下面的指令获取更新</li>
-</ol>
-<pre><code class="language-bash">git pull public main
-</code></pre>
+<ul>
+<li>选择Yes，然后弹出选项框选Unspecified</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                                                    <a rel="prev" href="../dev-env/install-ubuntu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                                    <a rel="prev" href="../dev-env/build.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
-                                                    <a rel="next" href="../dev-env/build.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                                    <a rel="next" href="../b-plus-tree.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -247,11 +207,11 @@ git config --local user.email &quot;xxxxxxx@stu.ecnu.edu.cn&quot; #邮箱
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                                    <a rel="prev" href="../dev-env/install-ubuntu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                    <a rel="prev" href="../dev-env/build.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
-                                    <a rel="next" href="../dev-env/build.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                    <a rel="next" href="../b-plus-tree.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                             </nav>
