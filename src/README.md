@@ -13,6 +13,8 @@
     - [cpp reference](https://en.cppreference.com/w/)提供了非常详细的C++标准文档
     - [GDB调试入门指南](https://zhuanlan.zhihu.com/p/74897601)
     - [GDB Cheatsheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf)
+    - [一个可视化交互式git教学](https://learngitbranching.js.org/?locale=zh_CN)
+        - 如果你还不会使用git可以先做一遍这个教学
 
 ---
 **关于网络**

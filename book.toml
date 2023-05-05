@@ -14,10 +14,13 @@ additional-css = ["./assets/css/mdbook-admonish.css"]
 [preprocessor]
 
 [preprocessor.admonish]
-command = "./mdbook-admonish"
+command = "bin/mdbook-admonish"
 on_failure = "bail"
 assets_version = "2.0.1" # do not edit: managed by `mdbook-admonish install`
 
 [preprocessor.katex]
-command = "./mdbook-katex"
+command = "bin/mdbook-katex"
 after = ["links"]
+
+[preprocessor.svgbob2]
+command = "bin/mdbook-svgbob2"
