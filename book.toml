@@ -9,3 +9,11 @@ title = "华东师范大学 软件工程学院 数据库实践 课程实验 2023
 mathjax-support = true
 git-repository-url = "https://github.com/DB20XX/DB20XXDoc"
 site-url = "db20xx.github.io/DB20XXDoc"
+additional-css = ["./assets/css/mdbook-admonish.css"]
+
+[preprocessor]
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+on_failure = "bail"
+assets_version = "2.0.1" # do not edit: managed by `mdbook-admonish install`
